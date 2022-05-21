@@ -15,6 +15,4 @@ userName: 'solomon',
 id: 'kdd',
 userName: 'utred',
 },
-],
-},
-];
+]}];
