@@ -1,12 +1,11 @@
 const db = require('../db/users.json');
 const fs = require('fs').promises;
-const bufferLayout = require('buffer-layout');
 const bufferDecoder = require('../utils/bufferDecoder/bufferDecoder');
 
 const getUsers = async () => {
 	try {
 		const db = await fs.readFile(
-			'../training-with-kendo/mockServer/db/users.json',
+			'../buffer-string-decoder/db/users.json',
 			'utf8',
 			(err) => {
 				if (err) {
@@ -15,33 +14,41 @@ const getUsers = async () => {
 			},
 		);
 
-		// console.log('Buffer db: ', db);
 		const array = [
 			{
 				id: 'ffrf',
 				userName: 'Pnevmat',
-				fullName: 'Vadim Kravchenko',
-				lastLogin: 'Fri March 15 2022',
-			},
-			{
-				id: 'ffrf',
-				userName: 'Lipka',
-				fullName: 'Peter Laners',
-				lastLogin: 'Wed Oct 25 2021',
+				// fullName: 'Vadim Kravchenko',
+				// lastLogin: 'Fri March 15 2022',
+				friends: [
+					{
+						id: 'hfg',
+						userName: 'solomon',
+						// fullName: 'Kate Barson',
+						// lastLogin: 'Fri March 15 2022',
+					},
+					{
+						id: 'kdd',
+						userName: 'utred',
+						// fullName: 'Ken Livings',
+						// lastLogin: 'Fri March 15 2022',
+					},
+				],
 			},
 		];
-		// const buffer = Buffer.from(JSON.stringify(array), 'utf-8');
+
+		const buffer = Buffer.from(JSON.stringify(array), 'utf-8');
 		// console.log('Training buffer: ', buffer);
 		// console.log('Type of training buffer', typeof buffer);
-		// const stringBuffer = buffer.toString();
+
+		const stringBuffer = buffer.toString();
 		// console.log('Stringified buffer in index.js: ', stringBuffer);
 		// console.log(
 		// 	'Type of stringified buffer in index.js: ',
 		// 	typeof stringBuffer,
 		// );
-		console.log('Stringified db in index.js: ', db);
-		console.log('Type of stringified db in index.js: ', typeof db);
-		const decodedBuffer = bufferDecoder(db);
+
+		const decodedBuffer = bufferDecoder(stringBuffer);
 		console.log('Decoded buffer: ', decodedBuffer);
 		return decodedBuffer;
 	} catch (e) {
