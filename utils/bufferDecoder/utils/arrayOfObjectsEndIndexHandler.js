@@ -24,7 +24,10 @@ const arrayOfObjectsEndIndexHandler = (index, endIndex, buffer) => {
 			) {
 				result = i;
 				break;
-			} else if (buffer[i + 1] === ']' && buffer[i + 2] === '}') {
+			} else if (
+				(buffer[i + 1] === ']' && buffer[i + 2] === '}') ||
+				(buffer[i + 1] === ']' && buffer[i + 2] === ',')
+			) {
 				result = i;
 				break;
 			}

@@ -2,15 +2,17 @@ const ArrayAndObjectResolver = require('../utils/ArrayAndObjectResolver');
 const arrayOfObjectsEndIndexHandler = require('../utils/arrayOfObjectsEndIndexHandler');
 
 const arrayConstructor = (startI, endI, buffer) => {
+	// debugger;
 	// console.log('Buffer in array constructor and recursion: ', buffer);
 	// console.log('Start index in array constructor: ', startI);
 	// console.log('End index in array constructor: ', endI);
 	// console.log('Buffer end index in array constructor: ', buffer.length - 1);
 	const result = {passedSteps: null, result: null};
 	let subBuffer = null;
+	// let passedSteps = pasSteps;
+	// let recursionStep = recStep ? recStep : 0;
 	let startIndex = startI;
 	let endIndex = 0;
-	// let simpleArrStartIndex = 0;
 
 	for (let i = startI; i <= endI; i++) {
 		if (i <= startIndex && !result.result && buffer[i] === '[') {
@@ -50,7 +52,7 @@ const arrayConstructor = (startI, endI, buffer) => {
 		}
 	}
 
-	// console.log('Result of arrayConstructor: ', result);
+	console.log('Result of arrayConstructor: ', result);
 	return result;
 };
 

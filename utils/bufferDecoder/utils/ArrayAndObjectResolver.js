@@ -1,5 +1,4 @@
 const arrayOfObjectsEndIndexHandler = require('./arrayOfObjectsEndIndexHandler');
-// const simpleArrayConstructor = require('../constructors/simpleArrayConstructor');
 
 class ArrayAndObjectResolver {
 	constructor(startIndex, endIndex, buffer) {
@@ -9,12 +8,13 @@ class ArrayAndObjectResolver {
 	}
 
 	arrayConstructor(startI, endI) {
+		// debugger;
 		const result = {passedSteps: null, result: null};
 		let subBuffer = null;
 		let passedSteps = null;
+		// let recursionStep = recStep ? recStep : 0;
 		let startIndex = startI;
 		let endIndex = 0;
-		// let simpleArrStartIndex = 0;
 
 		for (let i = startI; i <= endI; i++) {
 			if (i <= startIndex && !result.result && this.buffer[i] === '[') {
@@ -25,7 +25,7 @@ class ArrayAndObjectResolver {
 			) {
 				startIndex = i;
 				endIndex = arrayOfObjectsEndIndexHandler(i, endI, this.buffer);
-
+				// debugger;
 				for (let index = startIndex; index <= endIndex; index++) {
 					if (!subBuffer) {
 						subBuffer = this.buffer[index];
@@ -44,7 +44,7 @@ class ArrayAndObjectResolver {
 						result.passedSteps = passedSteps;
 					}
 				}
-
+				// debugger;
 				if (subBuffer) {
 					if (this.buffer !== subBuffer) {
 						startIndex = 0;
@@ -56,24 +56,22 @@ class ArrayAndObjectResolver {
 						subBuffer,
 					);
 					result.result.push(resultOfObjectConstructor.result);
-					// console.log('Result after push of object constructor: ', result);
+					console.log('Result after push of object constructor: ', result);
 					subBuffer = null;
 				}
 			}
 		}
-		// console.log('Result of array constructor in class: ', result);
 		return result;
 	}
 
 	objectConstructor(startI, endI, buffer) {
+		// debugger;
 		const result = {passedSteps: null, result: null};
 		let objectProperty = null;
 		let objectValue = null;
 		let passedSteps = null;
 
 		let isObjectValue = false;
-		// let isObjectOfObjects = false;
-		// let isObjectOfArray = false;
 
 		let startIndex = 0;
 		let endIndex = 0;
@@ -85,22 +83,25 @@ class ArrayAndObjectResolver {
 			) {
 				result.result = {};
 			} else if (i > startI && buffer[i] === '{') {
-				// isObjectOfObjects = true;
 				startIndex = i;
 				endIndex = endI - 1;
 				break;
 			} else if (i > startI && buffer[i] === '[') {
-				// isObjectOfArray = true;
 				startIndex = i;
 				endIndex = endI - 1;
 				break;
 			}
 		}
-
+		// debugger;
 		for (let i = startI; i <= endI; i++) {
 			// console.log('Buffer item: ', buffer[i]);
-			if (i <= 1 && buffer[i] === '{') {
-				result.result = {};
+			if (
+				passedSteps &&
+				i !== passedSteps.length + 2 &&
+				buffer[passedSteps.length] === ',' &&
+				buffer[passedSteps.length - 1] === ']'
+			) {
+				continue;
 			} else if (
 				i > 1 &&
 				buffer[i] !== '{' &&
@@ -132,14 +133,12 @@ class ArrayAndObjectResolver {
 						buffer[i - 1] === ',' ||
 						buffer[i - 1] === '"'
 					) {
-						// new RegExp(/\W/).test(buffer[i - 2])
 						if (/\W/.test(buffer[i - 2])) {
 							passedSteps += buffer[i - 2];
 						}
 						passedSteps += buffer[i - 1];
 					}
 					passedSteps += buffer[i];
-					// new RegExp(/\W/).test(buffer[i + 1])
 					if (/\W/.test(buffer[i + 1])) {
 						passedSteps += buffer[i + 1];
 					}
@@ -161,17 +160,33 @@ class ArrayAndObjectResolver {
 							break;
 						}
 					}
-
+					// debugger;
 					const arrayConstructorResult = this.arrayConstructor(
 						startIndex,
 						endIndex,
 					);
-
+					// debugger;
 					objectValue = arrayConstructorResult.result;
 					result.result[objectProperty] = objectValue;
-
+					// debugger;
 					if (!passedSteps) {
 						passedSteps = arrayConstructorResult.passedSteps;
+					} else if (
+						buffer[
+							(
+								passedSteps +
+								buffer[i - 1] +
+								buffer[i] +
+								arrayConstructorResult.passedSteps +
+								']'
+							).length
+						] === ','
+					) {
+						passedSteps +=
+							buffer[i - 1] +
+							buffer[i] +
+							arrayConstructorResult.passedSteps +
+							']';
 					} else {
 						passedSteps +=
 							buffer[i - 1] +
@@ -198,8 +213,11 @@ class ArrayAndObjectResolver {
 						'Passed steps in array constructor of class: ',
 						passedSteps,
 					);
+
 					if (this.buffer.length === passedSteps.length) {
 						break;
+					} else {
+						continue;
 					}
 				} else if (i > 1 && buffer[i] === '{') {
 					startIndex = i;
@@ -233,9 +251,8 @@ class ArrayAndObjectResolver {
 				}
 
 				passedSteps += buffer[i];
-
-				// new RegExp(/\W/).test(buffer[i + 1])
-				if (/\W/.test(buffer[i + 1]) && buffer[i + 1] !== ' ') {
+				// && buffer[i + 1] !== ' '
+				if (/\W/.test(buffer[i + 1]) && /\W/.test(buffer[i + 2])) {
 					passedSteps += buffer[i + 1];
 				}
 			} else if (
@@ -251,7 +268,6 @@ class ArrayAndObjectResolver {
 				isObjectValue = false;
 			}
 		}
-		console.log('Result of object constructor in class: ', result);
 		return result;
 	}
 }
