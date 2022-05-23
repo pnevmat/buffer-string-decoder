@@ -24,32 +24,32 @@ const array = [
  {
   id: 'ffrf',
   userName: 'Pnevmat',
-	fullName: 'Vadim Kravchenko',
-	lastLogin: 'Fri March 15 2022',
-	friends: [
+  fullName: 'Vadim Kravchenko',
+  lastLogin: 'Fri March 15 2022',
+  friends: [
 	 {
 	  id: 'hfg',
-		userName: 'solomon',
-		fullName: 'Kate Barson',
-		lastLogin: 'Fri March 15 2022',
+	  userName: 'solomon',
+	  fullName: 'Kate Barson',
+	  lastLogin: 'Fri March 15 2022',
 	 },
 	 {
-		id: 'kdd',
-		userName: 'utred',
-		fullName: 'Ken Livings',
-		lastLogin: 'Fri March 15 2022',
+	  id: 'kdd',
+	  userName: 'utred',
+	  fullName: 'Ken Livings',
+	  lastLogin: 'Fri March 15 2022',
 	 },
 	],
-	activities: [
+  activities: [
 	 {
-		id: 'fbpl',
-		activityName: 'Football',
-		achievements: '1st place on university tournament',
+	  id: 'fbpl',
+	  activityName: 'Football',
+	  achievements: '1st place on university tournament',
 	 },
 	 {
 	  id: 'votp',
-		activityName: 'voleiball',
-		achievements: 'took part in university competitions',
+	  activityName: 'voleiball',
+	  achievements: 'took part in university competitions',
 	 },
 	],
  },
