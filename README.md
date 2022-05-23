@@ -1,6 +1,6 @@
 # buffer-string-decoder
 
-# As for now it resolves array of object like this:
+## As for now it resolves array of object like this:
 
 const array = [
 {
@@ -17,7 +17,9 @@ userName: 'utred',
 },
 ]}];
 
-and more complicated arrays of objects like theese:
+## And more complicated arrays of objects like theese:
+
+image.png
 
 const array = [
 {
@@ -50,7 +52,7 @@ id: 'votp',
 activityName: 'voleiball',
 achievements: 'took part in university competitions',
 },
-],
+]
 },
 ];
 
