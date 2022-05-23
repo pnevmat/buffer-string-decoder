@@ -48,7 +48,7 @@ const arrayHandler = (buffer) => {
 		// console.log('Result of object constractor in array handler: ', result);
 	}
 
-	console.log('Result of arrayHandler: ', result);
+	// console.log('Result of arrayHandler: ', result);
 	return result;
 };
 

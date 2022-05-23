@@ -18,8 +18,8 @@ const getUsers = async () => {
 			{
 				id: 'ffrf',
 				userName: 'Pnevmat',
-				// fullName: 'Vadim Kravchenko',
-				// lastLogin: 'Fri March 15 2022',
+				fullName: 'Vadim Kravchenko',
+				lastLogin: 'Fri March 15 2022',
 				friends: [
 					{
 						id: 'hfg',
