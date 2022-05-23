@@ -19,7 +19,7 @@ userName: 'utred',
 
 ## And more complicated arrays of objects like theese:
 
-```javascript
+```image
 const array = [
 	{
 		id: 'ffrf',
