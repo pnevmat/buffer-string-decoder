@@ -61,6 +61,7 @@ class ArrayAndObjectResolver {
 				}
 			}
 		}
+		// console.log('Result of array constructor in class: ', result);
 		return result;
 	}
 
@@ -184,7 +185,19 @@ class ArrayAndObjectResolver {
 					objectProperty = null;
 					objectValue = null;
 					isObjectValue = false;
-
+					console.log('Buffer in array constructor of class: ', this.buffer);
+					console.log(
+						'Buffer length in array constructor of class: ',
+						this.buffer.length,
+					);
+					console.log(
+						'Passed steps length in array constructor of class: ',
+						passedSteps.length,
+					);
+					console.log(
+						'Passed steps in array constructor of class: ',
+						passedSteps,
+					);
 					if (this.buffer.length === passedSteps.length) {
 						break;
 					}
@@ -220,8 +233,9 @@ class ArrayAndObjectResolver {
 				}
 
 				passedSteps += buffer[i];
+
 				// new RegExp(/\W/).test(buffer[i + 1])
-				if (/\W/.test(buffer[i + 1])) {
+				if (/\W/.test(buffer[i + 1]) && buffer[i + 1] !== ' ') {
 					passedSteps += buffer[i + 1];
 				}
 			} else if (
@@ -237,6 +251,7 @@ class ArrayAndObjectResolver {
 				isObjectValue = false;
 			}
 		}
+		console.log('Result of object constructor in class: ', result);
 		return result;
 	}
 }

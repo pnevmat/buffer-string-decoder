@@ -1,4 +1,3 @@
-// const arrayOfObjectsHandler = require('./handlers/arrayOfObjectsHandler');
 const arrayHandler = require('./handlers/arrayHandler');
 const objectHandler = require('./handlers/objectHandler');
 const stringHandler = require('./handlers/stringHandler');
@@ -13,15 +12,6 @@ const bufferDecoder = (buffer) => {
 	let result = null;
 
 	if (buffer[0] === '[' || buffer[1] === '[') {
-		// if (buffer[1] === '{' || buffer[2] === '{') {
-		// 	result = arrayOfObjectsHandler(buffer);
-		// 	console.log('Result of arrayOfObjectsHandler in bufferDecoder: ', result);
-		// } else {
-		// 	console.log('Array handler started');
-		// 	result = arrayHandler(buffer);
-		// 	// console.log('Result of array handler in bufferDecoder: ', result);
-		// }
-		// console.log('Array handler started');
 		result = arrayHandler(buffer);
 		// console.log('Result of array handler in bufferDecoder: ', result);
 		return result;

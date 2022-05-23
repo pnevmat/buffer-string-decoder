@@ -50,7 +50,7 @@ const arrayConstructor = (startI, endI, buffer) => {
 		}
 	}
 
-	console.log('Result of arrayConstructor: ', result);
+	// console.log('Result of arrayConstructor: ', result);
 	return result;
 };
 
