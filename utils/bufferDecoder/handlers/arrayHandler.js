@@ -41,8 +41,11 @@ const arrayHandler = (buffer) => {
 		// console.log('Result of array constractor in array handler: ', result);
 	} else if (isArray && !isArrayOfArray && !isArrayOfObjects && !isObject) {
 		// console.log('Simple array constructor started');
-		result = [...simpleArrayConstructor(buffer)];
-		// console.log('Result of simple array constractor in array handler: ', result);
+		result = [...simpleArrayConstructor(buffer).result];
+		// console.log(
+		// 	'Result of simple array constractor in array handler: ',
+		// 	result,
+		// );
 	} else if (isObject && !isArrayOfObjects && !isArrayOfArray && !isArray) {
 		// console.log('Object constructor started');
 		result = objectConstructor(startIndex, endIndex, buffer);

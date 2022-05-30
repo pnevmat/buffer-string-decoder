@@ -1,5 +1,4 @@
 const ArrayAndObjectResolver = require('../utils/ArrayAndObjectResolver');
-const arrayOfObjectsEndIndexHandler = require('../utils/arrayOfObjectsEndIndexHandler');
 
 const arrayConstructor = (startI, endI, buffer) => {
 	// debugger;
@@ -7,12 +6,9 @@ const arrayConstructor = (startI, endI, buffer) => {
 	// console.log('Start index in array constructor: ', startI);
 	// console.log('End index in array constructor: ', endI);
 	// console.log('Buffer end index in array constructor: ', buffer.length - 1);
-	const result = {passedSteps: null, result: null};
-	let subBuffer = null;
-	// let passedSteps = pasSteps;
-	// let recursionStep = recStep ? recStep : 0;
+	const result = {endIndex: null, result: null};
+
 	let startIndex = startI;
-	let endIndex = 0;
 
 	for (let i = startI; i <= endI; i++) {
 		if (i <= startIndex && !result.result && buffer[i] === '[') {
@@ -22,33 +18,15 @@ const arrayConstructor = (startI, endI, buffer) => {
 			(i >= startIndex && result.result && buffer[i] === '{')
 		) {
 			startIndex = i;
-			endIndex = arrayOfObjectsEndIndexHandler(i, endI, buffer);
+			// debugger;
+			const resolver = new ArrayAndObjectResolver(buffer);
+			const resultOfObjectConstructor = resolver.objectConstructor(startIndex);
+			result.result.push(resultOfObjectConstructor.result);
+			// console.log('Result after push of object constructor: ', result);
 
-			for (let index = startIndex; index <= endIndex; index++) {
-				if (!subBuffer) {
-					subBuffer = buffer[index];
-				} else {
-					subBuffer += buffer[index];
-				}
-			}
-
-			if (subBuffer) {
-				const resolver = new ArrayAndObjectResolver(
-					startIndex,
-					endIndex,
-					subBuffer,
-				);
-				const resultOfObjectConstructor = resolver.objectConstructor(
-					startIndex,
-					endIndex,
-					subBuffer,
-				);
-
-				result.result.push(resultOfObjectConstructor.result);
-				// console.log('Result after push of object constructor: ', result);
-				subBuffer = null;
-				break;
-			}
+			startIndex = resultOfObjectConstructor.endIndex;
+			result.endIndex = startIndex;
+			break;
 		}
 	}
 

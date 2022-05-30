@@ -19,31 +19,130 @@ const getUsers = async () => {
 				id: 'ffrf',
 				userName: 'Pnevmat',
 				fullName: 'Vadim Kravchenko',
-				lastLogin: 'Fri March 15 2022',
 				friends: [
 					{
 						id: 'hfg',
 						userName: 'solomon',
 						fullName: 'Kate Barson',
+						activities: [
+							{
+								id: 'rerf',
+								achievements: [
+									'took part in school competitions',
+									'took part in university competitions',
+								],
+								activityName: 'Football',
+							},
+							{
+								id: 'utt7g',
+								activityName: 'voleiball',
+								achievements: [
+									'took part in school competitions',
+									'1st place on university tournament',
+									'took part in student national tournament',
+								],
+							},
+						],
 						lastLogin: 'Fri March 15 2022',
+						friends: [
+							{
+								id: 'ffrf',
+								userName: 'Pnevmat',
+								fullName: 'Vadim Kravchenko',
+								lastLogin: 'Fri March 15 2022',
+								activities: [
+									{
+										id: 'fbpl',
+										achievements: [
+											'took part in school competitions',
+											'1st place on university tournament',
+											'took part in student national tournament',
+										],
+										activityName: 'Football',
+									},
+									{
+										id: 'votp',
+										activityName: 'voleiball',
+										achievements: [
+											'took part in school competitions',
+											'took part in university competitions',
+										],
+									},
+								],
+							},
+						],
 					},
 					{
 						id: 'kdd',
 						userName: 'utred',
 						fullName: 'Ken Livings',
+						activities: [
+							{
+								id: 'aetd',
+								achievements: [
+									'took part in school competitions',
+									'took part in university competitions',
+								],
+								activityName: 'Football',
+							},
+							{
+								id: 'utryb',
+								activityName: 'voleiball',
+								achievements: [
+									'took part in school competitions',
+									'1st place on university tournament',
+									'took part in student national tournament',
+								],
+							},
+						],
+						friends: [
+							{
+								id: 'ffrf',
+								userName: 'Pnevmat',
+								fullName: 'Vadim Kravchenko',
+								lastLogin: 'Fri March 15 2022',
+								activities: [
+									{
+										id: 'fbpl',
+										achievements: [
+											'took part in school competitions',
+											'1st place on university tournament',
+											'took part in student national tournament',
+										],
+										activityName: 'Football',
+									},
+									{
+										id: 'votp',
+										activityName: 'voleiball',
+										achievements: [
+											'took part in school competitions',
+											'took part in university competitions',
+										],
+									},
+								],
+							},
+						],
 						lastLogin: 'Fri March 15 2022',
 					},
 				],
+				lastLogin: 'Fri March 15 2022',
 				activities: [
 					{
 						id: 'fbpl',
+						achievements: [
+							'took part in school competitions',
+							'1st place on university tournament',
+							'took part in student national tournament',
+						],
 						activityName: 'Football',
-						achievements: '1st place on university tournament',
 					},
 					{
 						id: 'votp',
 						activityName: 'voleiball',
-						achievements: 'took part in university competitions',
+						achievements: [
+							'took part in school competitions',
+							'took part in university competitions',
+						],
 					},
 				],
 			},
