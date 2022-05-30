@@ -6,7 +6,6 @@ class ArrayAndObjectResolver {
 	}
 
 	arrayConstructor(startI) {
-		// debugger;
 		const result = {endIndex: null, result: null};
 
 		let startIndex = startI;
@@ -21,17 +20,19 @@ class ArrayAndObjectResolver {
 				(i >= startIndex && result.result && this.buffer[i] === '{')
 			) {
 				startIndex = i;
-				// debugger;
+
 				const resultOfObjectConstructor = this.objectConstructor(startIndex);
 				result.result.push(resultOfObjectConstructor.result);
-				// console.log('Result after push of object constructor: ', result);
+
 				startIndex = resultOfObjectConstructor.endIndex;
 			} else if (i >= startIndex && result.result && this.buffer[i] === '"') {
 				startIndex = i - 1;
+
 				const simpleArrayConstructorResult = simpleArrayConstructor(
 					startIndex,
 					this.buffer,
 				);
+
 				result.result = simpleArrayConstructorResult.result;
 				startIndex = simpleArrayConstructorResult.endIndex;
 			} else if (
@@ -42,13 +43,12 @@ class ArrayAndObjectResolver {
 				break;
 			}
 		}
-		console.log('Result of array constructor in class: ', result);
+
 		result.endIndex = startIndex;
 		return result;
 	}
 
 	objectConstructor(startI) {
-		// debugger;
 		const result = {endIndex: null, result: null};
 		let objectProperty = null;
 		let objectValue = null;
@@ -57,9 +57,7 @@ class ArrayAndObjectResolver {
 
 		let startIndex = startI;
 
-		// debugger;
 		for (let i = startI; i <= this.buffer.length - 1; i++) {
-			// console.log('Buffer item: ', buffer[i]);
 			if (i <= startIndex && !result.result && this.buffer[i] === '{') {
 				result.result = {};
 			} else if (i <= startIndex && result.result) {
@@ -77,10 +75,8 @@ class ArrayAndObjectResolver {
 			) {
 				if (!objectProperty) {
 					objectProperty = this.buffer[i];
-					// console.log('Object property: ', objectProperty);
 				} else {
 					objectProperty += this.buffer[i];
-					// console.log('Object property: ', objectProperty);
 				}
 			} else if (i > 1 && this.buffer[i] === ':') {
 				isObjectValue = true;
@@ -94,7 +90,6 @@ class ArrayAndObjectResolver {
 				if (i > 1 && this.buffer[i] === '[') {
 					startIndex = i;
 
-					// debugger;
 					const arrayConstructorResult = this.arrayConstructor(startIndex);
 
 					objectValue = arrayConstructorResult.result;
@@ -113,7 +108,6 @@ class ArrayAndObjectResolver {
 						continue;
 					}
 				} else if (i > 1 && this.buffer[i] === '{') {
-					// debugger;
 					startIndex = i;
 
 					const objectConstructorResult = this.objectConstructor(startIndex);
@@ -136,10 +130,8 @@ class ArrayAndObjectResolver {
 
 				if (!objectValue) {
 					objectValue = this.buffer[i];
-					// console.log('Object value: ', objectValue);
 				} else {
 					objectValue += this.buffer[i];
-					// console.log('Object value: ', objectValue);
 				}
 			} else if (
 				(i > 1 &&
@@ -149,12 +141,9 @@ class ArrayAndObjectResolver {
 					this.buffer[i + 1] === '"') ||
 				(i > 1 && this.buffer[i] === '}' && objectProperty && objectValue)
 			) {
-				// console.log('Index of iterator: ', i);
-				// console.log('Buffer end index: ', buffer.length - 1);
-				// console.log('Object property: ', objectProperty);
-				// debugger;
 				result.result[objectProperty] = objectValue;
 				result.endIndex = i;
+
 				objectProperty = null;
 				objectValue = null;
 				isObjectValue = false;
@@ -166,10 +155,11 @@ class ArrayAndObjectResolver {
 				if (this.buffer[i] === '}') {
 					result.endIndex = i;
 				}
+
 				break;
 			}
 		}
-		console.log('Result of object constructor in class: ', result);
+
 		return result;
 	}
 }
