@@ -5,7 +5,6 @@ const objectHandler = (buffer) => {
 	let isObjectValue = false;
 
 	for (let i = 0; i <= buffer.length - 1; i++) {
-		console.log('Buffer item: ', buffer[i]);
 		if (i <= 1 && buffer[i] === '{') {
 			result = {};
 		} else if (
@@ -20,10 +19,8 @@ const objectHandler = (buffer) => {
 		) {
 			if (!objectProperty) {
 				objectProperty = buffer[i];
-				console.log('Object property: ', objectProperty);
 			} else {
 				objectProperty += buffer[i];
-				console.log('Object property: ', objectProperty);
 			}
 		} else if (i > 1 && buffer[i] === ':') {
 			isObjectValue = true;
@@ -36,25 +33,21 @@ const objectHandler = (buffer) => {
 		) {
 			if (!objectValue) {
 				objectValue = buffer[i];
-				console.log('Object value: ', objectValue);
 			} else {
 				objectValue += buffer[i];
-				console.log('Object value: ', objectValue);
 			}
 		} else if (
 			(i > 1 && buffer[i] === ',' && i < buffer.length - 1) ||
 			(i > 1 && buffer[i] === '}' && i === buffer.length - 1)
 		) {
-			console.log('Index of iterator: ', i);
-			console.log('Buffer end index: ', buffer.length - 1);
-			console.log('Object property: ', objectProperty);
 			result[objectProperty] = objectValue;
+
 			objectProperty = null;
 			objectValue = null;
 			isObjectValue = false;
 		}
 	}
-	console.log('Result of objectHandler: ', result);
+
 	return result;
 };
 
