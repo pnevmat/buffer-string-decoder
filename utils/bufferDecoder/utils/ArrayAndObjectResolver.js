@@ -113,6 +113,7 @@ class ArrayAndObjectResolver {
 						continue;
 					}
 				} else if (i > 1 && this.buffer[i] === '{') {
+					// debugger;
 					startIndex = i;
 
 					const objectConstructorResult = this.objectConstructor(startIndex);
@@ -125,6 +126,12 @@ class ArrayAndObjectResolver {
 					isObjectValue = false;
 
 					startIndex = objectConstructorResult.endIndex;
+
+					if (this.buffer.length === result.endIndex) {
+						break;
+					} else {
+						continue;
+					}
 				}
 
 				if (!objectValue) {
