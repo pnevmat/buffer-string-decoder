@@ -1,5 +1,4 @@
 const arrayConstructor = require('../constructors/arrayConstructor');
-const objectConstructor = require('../constructors/objectConstructor');
 const simpleArrayConstructor = require('../constructors/simpleArrayConstructor');
 
 const arrayHandler = (buffer) => {
@@ -20,8 +19,6 @@ const arrayHandler = (buffer) => {
 			isObject = true;
 		} else if (i <= 2 && result && buffer[i] === '[') {
 			isArrayOfArray = true;
-			startIndex = i;
-			endIndex = buffer.length - 2;
 			break;
 		} else if (i <= 2 && result && buffer[i] === '{') {
 			isArrayOfObjects = true;
@@ -31,15 +28,13 @@ const arrayHandler = (buffer) => {
 		}
 	}
 
-	if (
-		(isArrayOfArray && startIndex && endIndex) ||
-		(isArrayOfObjects && startIndex === 0 && endIndex)
-	) {
+	if (isArrayOfObjects && startIndex === 0 && endIndex) {
 		result = [...arrayConstructor(startIndex, endIndex, buffer).result];
 	} else if (isArray && !isArrayOfArray && !isArrayOfObjects && !isObject) {
-		result = [...simpleArrayConstructor(buffer).result];
-	} else if (isObject && !isArrayOfObjects && !isArrayOfArray && !isArray) {
-		result = objectConstructor(startIndex, endIndex, buffer);
+		result = [...simpleArrayConstructor(startIndex, buffer).result];
+	} else if (isArrayOfArray) {
+		result =
+			'You have passed an array of array to decoder, pass array of objects instead';
 	}
 
 	return result;

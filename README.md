@@ -27,6 +27,8 @@ Simple arrays like this:
 ]
 ```
 
+Note! Pass numbers to simple array only as string, other way decoder will work not correctly.
+
 Arrays of object like this:
 
 ```image

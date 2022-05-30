@@ -271,10 +271,15 @@ const getUsers = async () => {
 			},
 		];
 
+		// Alse Buffer decoder was tested with thees cases
+		// ['sddbgfg', '1', 'wsdwegrg', 'dwder', '3'];
+		// {someProperty: 'dghgh', anotherProperty: 'sffhghgh'}
+		// {id: 'dwsf', name: 'Some Name', age: 17}
+
 		const buffer = Buffer.from(JSON.stringify(array), 'utf-8');
 
 		const stringBuffer = buffer.toString();
-
+		// Pass to decoder stringBuffer or db
 		const decodedBuffer = bufferDecoder(stringBuffer);
 
 		return decodedBuffer;
