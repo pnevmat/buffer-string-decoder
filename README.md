@@ -35,15 +35,15 @@ Arrays of object like this:
 const array = [
  {
   id: 'ffrf',
-  userName: 'Pnevmat',
+  userName: 'Some user name',
   friends: [
    {
     id: 'hfg',
-    userName: 'solomon',
+    userName: 'some user name',
    },
    {
     id: 'kdd',
-    userName: 'utred',
+    userName: 'some user name',
    },
   ]
  }
