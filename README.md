@@ -21,7 +21,7 @@ const array = [
 ];
 ```
 
-## And more complicated arrays of objects like theese:
+## And more complicated arrays of objects like theese in all variations:
 
 ```image
 const array = [
