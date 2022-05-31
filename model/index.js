@@ -1,6 +1,6 @@
 const db = require('../db/users.json');
 const fs = require('fs').promises;
-const bufferDecoder = require('../utils/bufferDecoder/bufferDecoder');
+const bufferStringDecoder = require('../utils/bufferDecoder/bufferStringDecoder');
 
 const getUsers = async () => {
 	try {
@@ -280,7 +280,7 @@ const getUsers = async () => {
 
 		const stringBuffer = buffer.toString();
 		// Pass to decoder stringBuffer or db
-		const decodedBuffer = bufferDecoder(stringBuffer);
+		const decodedBuffer = bufferStringDecoder(stringBuffer);
 
 		return decodedBuffer;
 	} catch (e) {

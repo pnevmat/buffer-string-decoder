@@ -2,7 +2,7 @@ const arrayHandler = require('./handlers/arrayHandler');
 const objectHandler = require('./handlers/objectHandler');
 const stringHandler = require('./handlers/stringHandler');
 
-const bufferDecoder = (buffer) => {
+const bufferStringDecoder = (buffer) => {
 	if (typeof buffer !== 'string') {
 		return 'You need to provide stringified entity to bufferDecoder';
 	}
@@ -20,4 +20,4 @@ const bufferDecoder = (buffer) => {
 	}
 };
 
-module.exports = bufferDecoder;
+module.exports = bufferStringDecoder;
