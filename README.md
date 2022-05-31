@@ -15,13 +15,13 @@ If you use fs.readFile:
 const bufferDecoder = require('buffer-string-decoder');
 
 const db = fs.readFile(
-	'file/path/db.json',
-	'utf8',
-	(err) => {
-		if (err) {
-			return err.message
-		}
-	}
+ 'file/path/db.json',
+ 'utf8',
+ (err) => {
+  if (err) {
+   return err.message
+  }
+ }
 );
 
 const decodedBuffer = bufferDecoder(db);
