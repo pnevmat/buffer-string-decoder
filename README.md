@@ -1,6 +1,6 @@
 # buffer-string-decoder
 
-This pacage was designed for decoding result of fs.readFile in Node.js backend, and today version of it is 01.00 .
+This pacage was designed for decoding result of fs.readFile in Node.js backend, and today version of it is 1.0.0 .
 Note that the file must be a Json file and the data in it must be in Json format.
 
 ## Installation
