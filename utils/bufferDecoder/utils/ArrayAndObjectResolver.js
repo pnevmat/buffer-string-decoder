@@ -1,4 +1,8 @@
 const simpleArrayConstructor = require('../constructors/simpleArrayConstructor');
+const arrayConstructorBreakValidator = require('./validators/arrayConstructorBreakValidator');
+const objectPropertyValidator = require('../utils/validators/objectPropertyValidator');
+const objectValueValidator = require('../utils/validators/objectValueValidator');
+const objectConstructorResultValidator = require('../utils/validators/objectConstructorResultValidator');
 
 class ArrayAndObjectResolver {
 	constructor(buffer) {
@@ -35,11 +39,7 @@ class ArrayAndObjectResolver {
 
 				result.result = simpleArrayConstructorResult.result;
 				startIndex = simpleArrayConstructorResult.endIndex;
-			} else if (
-				(this.buffer[i - 1] === ']' && this.buffer[i] === ',') ||
-				(this.buffer[i - 1] === ']' && this.buffer[i] === '}') ||
-				(this.buffer[i - 1] === '}' && this.buffer[i] === ']')
-			) {
+			} else if (arrayConstructorBreakValidator(i, this.buffer)) {
 				break;
 			}
 		}
@@ -62,17 +62,7 @@ class ArrayAndObjectResolver {
 				result.result = {};
 			} else if (i <= startIndex && result.result) {
 				continue;
-			} else if (
-				i > 1 &&
-				this.buffer[i] !== '{' &&
-				this.buffer[i] !== '}' &&
-				this.buffer[i] !== ']' &&
-				this.buffer[i] !== '/' &&
-				this.buffer[i] !== ':' &&
-				this.buffer[i] !== ',' &&
-				this.buffer[i] !== '"' &&
-				!isObjectValue
-			) {
+			} else if (objectPropertyValidator(i, isObjectValue, this.buffer)) {
 				if (!objectProperty) {
 					objectProperty = this.buffer[i];
 				} else {
@@ -80,13 +70,7 @@ class ArrayAndObjectResolver {
 				}
 			} else if (i > 1 && this.buffer[i] === ':') {
 				isObjectValue = true;
-			} else if (
-				i > 1 &&
-				isObjectValue &&
-				this.buffer[i] !== ',' &&
-				this.buffer[i] !== '"' &&
-				this.buffer[i] !== '}'
-			) {
+			} else if (objectValueValidator(i, isObjectValue, this.buffer)) {
 				if (i > 1 && this.buffer[i] === '[') {
 					startIndex = i;
 
@@ -134,12 +118,12 @@ class ArrayAndObjectResolver {
 					objectValue += this.buffer[i];
 				}
 			} else if (
-				(i > 1 &&
-					this.buffer[i] === ',' &&
-					objectProperty &&
-					objectValue &&
-					this.buffer[i + 1] === '"') ||
-				(i > 1 && this.buffer[i] === '}' && objectProperty && objectValue)
+				objectConstructorResultValidator(
+					i,
+					objectProperty,
+					objectValue,
+					this.buffer,
+				)
 			) {
 				result.result[objectProperty] = objectValue;
 				result.endIndex = i;

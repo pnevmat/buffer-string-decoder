@@ -1,3 +1,6 @@
+const objectPropertyValidator = require('../utils/validators/objectPropertyValidator');
+const objectValueValidator = require('../utils/validators/objectValueValidator');
+
 const objectHandler = (buffer) => {
 	let result = null;
 	let objectProperty = null;
@@ -7,16 +10,7 @@ const objectHandler = (buffer) => {
 	for (let i = 0; i <= buffer.length - 1; i++) {
 		if (i <= 1 && buffer[i] === '{') {
 			result = {};
-		} else if (
-			i > 1 &&
-			buffer[i] !== '{' &&
-			buffer[i] !== '}' &&
-			buffer[i] !== '/' &&
-			buffer[i] !== ':' &&
-			buffer[i] !== ',' &&
-			buffer[i] !== '"' &&
-			!isObjectValue
-		) {
+		} else if (objectPropertyValidator(i, isObjectValue, buffer)) {
 			if (!objectProperty) {
 				objectProperty = buffer[i];
 			} else {
@@ -24,13 +18,7 @@ const objectHandler = (buffer) => {
 			}
 		} else if (i > 1 && buffer[i] === ':') {
 			isObjectValue = true;
-		} else if (
-			i > 1 &&
-			isObjectValue &&
-			buffer[i] !== ',' &&
-			buffer[i] !== '"' &&
-			buffer[i] !== '}'
-		) {
+		} else if (objectValueValidator(i, isObjectValue, buffer)) {
 			if (!objectValue) {
 				objectValue = buffer[i];
 			} else {

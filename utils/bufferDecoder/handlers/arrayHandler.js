@@ -14,9 +14,6 @@ const arrayHandler = (buffer) => {
 		if (i <= 1 && !result && buffer[i] === '[') {
 			result = [];
 			isArray = true;
-		} else if (i === 0 && !result && buffer[i] === '{') {
-			result = {};
-			isObject = true;
 		} else if (i <= 2 && result && buffer[i] === '[') {
 			isArrayOfArray = true;
 			break;

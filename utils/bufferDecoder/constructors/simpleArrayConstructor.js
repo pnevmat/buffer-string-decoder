@@ -24,6 +24,7 @@ const simpleArrayConstructor = (startI, buffer) => {
 			(i > 1 && buffer[i] === ',' && buffer[i + 1] === '"') ||
 			(i > 1 && buffer[i] === ']')
 		) {
+
 			result.result.push(arrayValue);
 			startIndex = i;
 			arrayValue = null;
