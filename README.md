@@ -3,7 +3,43 @@
 This pacage was designed for decoding result of fs.readFile in Node.js backend, and today version of it is 01.00 .
 Note that the file must be a Json file and the data in it must be in Json format.
 
+## Installation
+
+`npm install buffer-string-decoder`
+
 ## Usage
+
+If you use fs.readFile:
+
+```
+const bufferDecoder = require('buffer-string-decoder');
+
+const db = fs.readFile(
+	'file/path/db.json',
+	'utf8',
+	(err) => {
+		if (err) {
+			return err.message
+		}
+	}
+);
+
+const decodedBuffer = bufferDecoder(db);
+```
+
+If you need for some reason to make buffer from js object, then use it like this:
+
+```
+const bufferDecoder = require('buffer-string-decoder');
+
+const array = ['some value', 'some value', 'another value'];
+
+const buffer = Buffer.from(JSON.stringify(array), 'utf-8');
+
+const stringBuffer = buffer.toString();
+
+const decodedBuffer = bufferDecoder(stringBuffer);
+```
 
 ## As for now it resolves:
 
