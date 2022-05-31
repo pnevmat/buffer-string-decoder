@@ -148,4 +148,4 @@ const array = [
 ];
 ```
 
-It is version 01.00, so it may still contain bugs
+It is version 1.0.0, so it may still contain bugs
