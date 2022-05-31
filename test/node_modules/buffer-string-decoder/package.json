@@ -1,0 +1,25 @@
+{
+  "name": "buffer-string-decoder",
+  "version": "1.0.0",
+  "description": "Transpiles fs buffer utf8 to js objects Node.js",
+  "main": "bufferStringDecoder.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/pnevmat/buffer-string-decoder.git"
+  },
+  "keywords": [
+    "buffer-string-decoder",
+    "node.js",
+    "buffer",
+    "node"
+  ],
+  "author": "Vadim Kravchenko",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/pnevmat/buffer-string-decoder/issues"
+  },
+  "homepage": "https://github.com/pnevmat/buffer-string-decoder#readme"
+}
