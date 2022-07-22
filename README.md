@@ -1,7 +1,11 @@
 # buffer-string-decoder
 
-This pacage was designed for decoding result of fs.readFile in Node.js backend, and today version of it is 1.0.0 .
-Note that the file must be a Json file and the data in it must be in Json format.
+This pacage was designed for decoding result of fs.readFile in Node.js backend, and it was updated to version 1.0.1 .
+The file that you pass to decoder must be a Json file and the data in it must be in Json format.  
+  
+Note! It is updated version 1.0.1 and it may still contain bugs  
+  
+[For any issues about package click here](https://github.com/pnevmat/buffer-string-decoder/discussions/8)
 
 ## Installation
 
@@ -147,5 +151,3 @@ const array = [
  },
 ];
 ```
-
-It is version 1.0.0, so it may still contain bugs

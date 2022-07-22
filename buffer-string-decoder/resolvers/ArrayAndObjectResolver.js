@@ -1,8 +1,9 @@
 const simpleArrayConstructor = require('../constructors/simpleArrayConstructor');
-const arrayConstructorBreakValidator = require('./validators/arrayConstructorBreakValidator');
+const arrayConstructorBreakValidator = require('../utils/validators/arrayConstructorBreakValidator');
 const objectPropertyValidator = require('../utils/validators/objectPropertyValidator');
 const objectValueValidator = require('../utils/validators/objectValueValidator');
 const objectConstructorResultValidator = require('../utils/validators/objectConstructorResultValidator');
+const simpleArrayConstructorStartValidator = require('../utils/validators/simpleArrayConstructorStartValidator');
 
 class ArrayAndObjectResolver {
 	constructor(buffer) {
@@ -29,7 +30,9 @@ class ArrayAndObjectResolver {
 				result.result.push(resultOfObjectConstructor.result);
 
 				startIndex = resultOfObjectConstructor.endIndex;
-			} else if (i >= startIndex && result.result && this.buffer[i] === '"') {
+			} else if (
+				simpleArrayConstructorStartValidator(i, startIndex, result, this.buffer)
+			) {
 				startIndex = i - 1;
 
 				const simpleArrayConstructorResult = simpleArrayConstructor(

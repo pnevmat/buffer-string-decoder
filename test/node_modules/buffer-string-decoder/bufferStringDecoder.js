@@ -1,21 +1,35 @@
-const arrayHandler = require('./handlers/arrayHandler');
-const objectHandler = require('./handlers/objectHandler');
-const stringHandler = require('./handlers/stringHandler');
+const ArrayAndObjectResolver = require('./resolvers/ArrayAndObjectResolver');
 
 const bufferStringDecoder = (buffer) => {
 	if (typeof buffer !== 'string') {
 		return 'You need to provide stringified entity to bufferDecoder';
 	}
+
 	let result = null;
+	let isArrayOfArray = false;
+	let startIndex = 0;
+	const resolver = new ArrayAndObjectResolver(buffer);
+
+	for (let i = 0; i <= buffer.length - 1; i++) {
+		if (i <= 2 && result && buffer[i] === '[') {
+			isArrayOfArray = true;
+			break;
+		} else if (i >= 3 && result) {
+			break;
+		}
+	}
 
 	if (buffer[0] === '[' || buffer[1] === '[') {
-		result = arrayHandler(buffer);
+		result = resolver.arrayConstructor(startIndex).result;
 		return result;
 	} else if (buffer[0] === '{' || buffer[1] === '{') {
-		result = objectHandler(buffer);
+		result = resolver.objectConstructor(startIndex).result;
 		return result;
+	} else if (isArrayOfArray) {
+		result =
+			'You have passed an array of array to decoder, pass array of objects instead';
 	} else {
-		result = stringHandler(buffer);
+		result = buffer;
 		return result;
 	}
 };
